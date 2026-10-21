@@ -55,46 +55,34 @@ jobs:
       - name: 8. Build Vite Web App
         run: |
           npm run build
-          # Remove any archive files from dist to keep the APK compact
           rm -rf dist/assets/aistudio/*.zip dist/*.zip 2>/dev/null || true
 
       - name: 9. Prepare and Sync Capacitor Android
         run: |
           npx cap telemetry off || true
-          # Configure local.properties to point to the runner's Android SDK
           echo "sdk.dir=$ANDROID_HOME" > android/local.properties
-          # Remove any stale zip files before sync
           rm -rf android/app/src/main/assets/public/assets/aistudio/*.zip 2>/dev/null || true
           npx cap sync android
 
       - name: 10. Prepare Android Build Environment
         run: |
-          # 1. Normalize line endings and execution permissions for Gradle wrapper
           if [ -f "android/gradlew" ]; then
             sed -i -e 's/\r$//' android/gradlew
             chmod +x android/gradlew
           fi
 
-          # 2. Ensure gradle-wrapper.jar exists
           mkdir -p android/gradle/wrapper
           if [ ! -f "android/gradle/wrapper/gradle-wrapper.jar" ]; then
             echo "Downloading gradle-wrapper.jar..."
             curl -sLo android/gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.2.1/gradle/wrapper/gradle-wrapper.jar || true
           fi
 
-          # 3. Ensure capacitor-cordova-android-plugins directory structure exists
           mkdir -p android/capacitor-cordova-android-plugins/src/main/libs
 
       - name: 11. Compile & Build Android Debug APK
         run: |
           cd android
-          if [ -x "./gradlew" ] && [ -f "gradle/wrapper/gradle-wrapper.jar" ]; then
-            echo "Building APK using ./gradlew assembleDebug..."
-            ./gradlew assembleDebug --no-daemon --stacktrace
-          else
-            echo "Building APK using system Gradle assembleDebug..."
-            gradle assembleDebug --no-daemon --stacktrace
-          fi
+          ./gradlew assembleDebug --no-daemon --stacktrace
           cd ..
 
       - name: 12. Locate Generated APK
