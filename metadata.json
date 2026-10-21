@@ -1,0 +1,6 @@
+{
+  "name": "আয় ব্যয় - বাংলা আয় ও ব্যয় ট্র্যাকার",
+  "description": "একটি আধুনিক, সহজ ও পূর্ণাঙ্গ বাংলা আয়-ব্যয় ও ক্যাশ বুক ট্র্যাকার। বাজেট, দেনা-পাওনা ও আর্থিক রিপোর্ট।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production & Build outputs
+build/
+dist/
+coverage/
+
+# Misc & OS files
+.DS_Store
+*.pem
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env*
+!.env.example
+
+# Android local & temporary files
+android/local.properties
+android/.gradle/
+android/app/build/
+android/capacitor-cordova-android-plugins/build/
+
+# Archive & Package files (keeps repository lightweight and avoids GitHub 100MB limits)
+*.zip
+*.apk
+*.aab
+public/assets/aistudio/

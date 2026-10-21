@@ -1,0 +1,219 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile document containing user preferences and settings",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "settings": { "type": "object" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Individual income, expense, or transfer transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["income", "expense", "transfer"] },
+        "amount": { "type": "number" },
+        "categoryId": { "type": "string" },
+        "categoryName": { "type": "string" },
+        "categoryIcon": { "type": "string" },
+        "categoryColor": { "type": "string" },
+        "accountId": { "type": "string" },
+        "accountName": { "type": "string" },
+        "toAccountId": { "type": "string" },
+        "toAccountName": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "note": { "type": "string" },
+        "person": { "type": "string" },
+        "receiptImage": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "type", "amount", "date"]
+    },
+    "Account": {
+      "title": "Account",
+      "description": "Financial wallet or account (Cash, bKash, Nagad, Bank, etc.)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["cash", "mobile_wallet", "bank", "card", "other"] },
+        "initialBalance": { "type": "number" },
+        "currentBalance": { "type": "number" },
+        "accountNumber": { "type": "string" },
+        "color": { "type": "string" },
+        "icon": { "type": "string" }
+      },
+      "required": ["id", "userId", "name", "type"]
+    },
+    "PersonRecord": {
+      "title": "PersonRecord",
+      "description": "Debt and loan tracking record for a person (dena-paona)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "address": { "type": "string" },
+        "date": { "type": "string" },
+        "type": { "type": "string", "enum": ["receive", "give"] },
+        "amount": { "type": "number" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "userId", "name", "type", "amount"]
+    },
+    "BudgetItem": {
+      "title": "BudgetItem",
+      "description": "Monthly expense budget allocation per category",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "categoryName": { "type": "string" },
+        "type": { "type": "string", "enum": ["percentage", "fixed"] },
+        "value": { "type": "number" },
+        "month": { "type": "number" },
+        "year": { "type": "number" }
+      },
+      "required": ["id", "userId", "categoryId", "value", "month", "year"]
+    },
+    "SavingsGoal": {
+      "title": "SavingsGoal",
+      "description": "User savings target and accumulated amount",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "targetAmount": { "type": "number" },
+        "currentAmount": { "type": "number" },
+        "date": { "type": "string" }
+      },
+      "required": ["id", "userId", "name", "targetAmount"]
+    },
+    "TaskItem": {
+      "title": "TaskItem",
+      "description": "Financial to-do or checklist item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "text": { "type": "string" },
+        "completed": { "type": "boolean" },
+        "dueDate": { "type": "string" },
+        "hasReminder": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "text"]
+    },
+    "NoteItem": {
+      "title": "NoteItem",
+      "description": "Quick financial note or bazar memo",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "category": { "type": "string" },
+        "date": { "type": "string" },
+        "isPinned": { "type": "boolean" }
+      },
+      "required": ["id", "userId", "title"]
+    },
+    "RecurringItem": {
+      "title": "RecurringItem",
+      "description": "Recurring income or expense schedule",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "type": { "type": "string", "enum": ["income", "expense"] },
+        "amount": { "type": "number" },
+        "frequency": { "type": "string" },
+        "dayOfMonth": { "type": "number" },
+        "categoryName": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "nextDate": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "amount"]
+    },
+    "MessRecord": {
+      "title": "MessRecord",
+      "description": "Monthly shared mess meals, bazaar cost and member balances",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "month": { "type": "number" },
+        "year": { "type": "number" },
+        "title": { "type": "string" },
+        "totalBazaarCost": { "type": "number" },
+        "calculationMode": { "type": "string", "enum": ["auto", "custom"] },
+        "customMealRate": { "type": "number" },
+        "effectiveMealRate": { "type": "number" },
+        "members": { "type": "array" },
+        "notes": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "month", "year", "effectiveMealRate"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile document containing user preferences and settings"
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "User income, expense and transfer transactions"
+    },
+    "/users/{userId}/accounts/{accountId}": {
+      "schema": "Account",
+      "description": "User cash, bank and mobile banking accounts"
+    },
+    "/users/{userId}/persons/{personId}": {
+      "schema": "PersonRecord",
+      "description": "User borrow and lend debt tracking records"
+    },
+    "/users/{userId}/budgets/{budgetId}": {
+      "schema": "BudgetItem",
+      "description": "Monthly category budget allocations"
+    },
+    "/users/{userId}/savings/{savingsId}": {
+      "schema": "SavingsGoal",
+      "description": "User savings goals and progress"
+    },
+    "/users/{userId}/tasks/{taskId}": {
+      "schema": "TaskItem",
+      "description": "User checklist and task items"
+    },
+    "/users/{userId}/notes/{noteId}": {
+      "schema": "NoteItem",
+      "description": "User financial notes and bazar lists"
+    },
+    "/users/{userId}/recurring/{recurringId}": {
+      "schema": "RecurringItem",
+      "description": "User recurring transactions schedule"
+    },
+    "/users/{userId}/mess_records/{recordId}": {
+      "schema": "MessRecord",
+      "description": "User shared mess calculations, meal rates and members"
+    }
+  }
+}
